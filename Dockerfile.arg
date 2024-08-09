@@ -1,0 +1,16 @@
+FROM python:3.7.9
+ARG app_type="static"
+ARG posfix="co"
+ARG service="svc"
+ARG region="la-north-2"
+ARG ak=""
+ARG sk=""
+ARG subdomain=""
+
+WORKDIR /app
+COPY . /app
+
+RUN pip install -i https://repo.huaweicloud.com/repository/pypi/simple -r requirements.txt
+
+RUN python find-param-func.py ${app_type} ${posfix} ${service} ${ak} ${sk} ${region} ${subdomain}
+#CMD ["python3", "find-param.py"]
